@@ -28,8 +28,9 @@ def search_student_name(students, name_search):
         if student.get('name') == name_search:
             print(f"\033[1;34m{student['id']}.\033[0m name: {student['name']} | age: {student['age']} | program: {student['program']} | status: {student['status']}")
 
-def update_info(students, id_search):
-    while True:
+def update_info(students, id_update):
+    yes = True
+    while yes:
         print("option to change:")
         print("""
         1. name:
@@ -37,24 +38,36 @@ def update_info(students, id_search):
         3. status
         4. Exit
     """)
-        option = input("choose option")
+        option = input("choose option: ")
         if option == "1":
             for student in students:
-                if student.get('id') == int(id_search):
-                    name = input("change name: ")
-                    student.get('name') == name
+                if student.get('id') == int(id_update):
+                    name = input("change name: ").lower()
+                    student['name'] = name
 
         elif option == "2":
             for student in students:
-                if student.get('id') == int(id_search):
-                    program = input("change name: ")
-                    student.get('program') == program
+                if student.get('id') == int(id_update):
+                    program = input("change program: ").lower()
+                    student['program'] = program
 
         elif option == "3":
             for student in students:
-                if student.get('id') == int(id_search):
-                    status = input("change name: ")
-                    student.get('status') == status
+                if student.get('id') == int(id_update):
+                    while yes:
+                        status = input("change status between \033[1;32m1.\033[0m or \033[1;31m2.\033[0m: ")
+                        if status == "1":
+                            status = "active".lower()
+                            print(f"status: \033[1;32m{status}\033[0m")
+                            break
+                        elif status == "2":
+                            status = "inactive".lower()
+                            print(f"status: \033[1;31m{status}\033[0m")
+                            break
+                        else:
+                            print("Choose a option between \033[1;32m1.\033[0m or \033[1;31m2.\033[0m")
+                        
+                student.get['status'] = status
 
         elif option == "4":
             break
